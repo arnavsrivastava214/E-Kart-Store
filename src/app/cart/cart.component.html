@@ -1,0 +1,29 @@
+<div class="fluid-container">
+ <div class="row">
+  <div class="col-sm-9">
+    <table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">img</th>
+        <th scope="col">title</th>
+        <th scope="col">price</th>
+        <th scope="col">category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dataDisplay; index as idx">
+        <td><img [src]="item.image" height="200px" width="200px" ></td>
+        <td>{{item.title}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.category}}</td>
+        <button (click)="delete(idx)">delete</button>
+      </tr> 
+    </tbody>
+  </table>
+</div>
+<div class="col-sm-3">
+  <h2>sub -total:</h2>
+  <h3>{{totalCount}}</h3>
+  </div>
+ </div> 
+</div>

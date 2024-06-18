@@ -1,0 +1,25 @@
+
+<div class="container-fluid">
+  <div class="row flex-wrap">
+    <h2>{{arraylength}}</h2>
+    <div class="col" *ngFor="let item of displayProductData" >
+      <div class="loader" *ngIf="showLoader">
+        <div class="justify-content-center jimu-primary-loading"></div>
+      </div>
+      <div class="card shadow rounded my-2" style="width: 18rem; height: 30rem;" >
+        <img [src]="item.image" class="zoom-img card-img-top p-3" width="150" height="200">
+        <div class="card-body">
+          <h5 class="card-title text-truncate text-danger"> <a (click)="getApiData(item.id)">{{item.title}}</a></h5>
+          <p class="card-text text-truncate">{{item.description}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{item.category}}</li>
+          <li class="list-group-item">{{item.price}}</li>
+        </ul>
+        <div class="card-body">
+          <button class="btn btn-primary btn-sm" (click)="getCartValues(item)">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
