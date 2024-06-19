@@ -8,44 +8,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./fetch-products.component.css']
 })
 export class FetchProductsComponent {
-  arraylength:any = 0
+  cartLength:any = 0
   pushTOLocalStrageArr:any = []
   constructor(private data:ProductListService, private route : Router){}
   showLoader:boolean = true;
   displayProductData:any=[];
   isLoggedIn:any;
 
-  ngOnInit(){
-    this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    this.fetchData();
-  }
   fetchData(){
     this.data.productData().subscribe((e)=>{
-     this.displayProductData =e;
-     console.log(this.displayProductData);
-     this.showLoader = false;
+      this.displayProductData = e;
+      console.log(this.displayProductData);
+      this.showLoader = false;
     })
   }
+  ngOnInit(){
+    this.isLoggedIn = localStorage.getItem("isLoggedIn");
+    this.pushTOLocalStrageArr = JSON.parse(<any>localStorage.getItem("cartData"));
+    this.fetchData();
 
+  }
+  
   getCartValues(cartValue:any){
-    this.pushTOLocalStrageArr.push(cartValue)
-      this.arraylength =  this.pushTOLocalStrageArr.length
-
-    
+    this.pushTOLocalStrageArr.push(cartValue);
+    this.cartLength = this.pushTOLocalStrageArr.length;
     localStorage.setItem("cartData",JSON.stringify(this.pushTOLocalStrageArr))
-
-    
+    this.sendMessage();
   }
+
   getApiData(id:any){
-    // this.data.singleProductSData(id).subscribe((fetchData)=>{
-    //   this.route.navigate(['single-Product']);
-
-    // })
-
     this.route.navigate(['single-Product',id]);
-
-
-
   }
 
+  sendMessage() {
+    this.data.sendData(this.cartLength);
+  }
 }

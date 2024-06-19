@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { elementAt } from 'rxjs';
+import { ProductListService } from '../services/product-list.service';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +10,11 @@ import { elementAt } from 'rxjs';
 export class CartComponent {
   pushTOLocalStrageArr: any = []
   totalCount: any = 0;
-  dataDisplay: any
+  dataDisplay: any;
+
+  constructor(private service:ProductListService){
+
+  }
 
   ngOnInit() {
     this.dataDisplay = JSON.parse(<any>localStorage.getItem("cartData"))
@@ -25,10 +30,13 @@ export class CartComponent {
   }
   delete(idx: any) {
     this.dataDisplay.splice(idx, 1);
-    this.subTotal()
-    localStorage.setItem("cartData", JSON.stringify(this.dataDisplay))
-
+    this.subTotal();
+    localStorage.setItem("cartData", JSON.stringify(this.dataDisplay));
+    this.sendMessage(this.dataDisplay.length);
   }
 
+  sendMessage(cartLen:any) {
+    this.service.sendData(cartLen);
+  }
 
 }
