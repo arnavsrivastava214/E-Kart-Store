@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./fetch-products.component.css']
 })
 export class FetchProductsComponent {
-  cartLength:any = 0
-  pushTOLocalStrageArr:any = []
-  constructor(private data:ProductListService, private route : Router){}
+  cartLength:any = 0;
+  pushTOLocalStrageArr:any = [];
   showLoader:boolean = true;
   displayProductData:any=[];
   isLoggedIn:any;
-
+  
+  constructor(private data:ProductListService, private route : Router){}
   fetchData(){
     this.data.productData().subscribe((e)=>{
       this.displayProductData = e;
@@ -24,7 +24,7 @@ export class FetchProductsComponent {
   }
   ngOnInit(){
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
-    this.pushTOLocalStrageArr = JSON.parse(<any>localStorage.getItem("cartData"));
+    this.pushTOLocalStrageArr = JSON.parse(<any>localStorage.getItem("cartData")) || [];
     this.fetchData();
 
   }
