@@ -8,6 +8,7 @@ import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { CartComponent } from './cart/cart.component';
 import { SigleProductComponent } from './sigle-product/sigle-product.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,9 @@ import { SigleProductComponent } from './sigle-product/sigle-product.component';
     HeaderModule,
     FooterModule
   ],
-  providers: [],
+  providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -31,7 +31,7 @@ export class HeaderComponent {
   ngOnInit() {
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
     let cartDataLen: any = JSON.parse(<any>localStorage.getItem("cartData"));
-    this.cartLength = cartDataLen.length;
+    this.cartLength = cartDataLen?.length;
     this.data.getData().subscribe(data => {
       if (data != null) {
         this.cartLength = data;
